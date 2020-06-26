@@ -42,11 +42,11 @@
 		session.setAttribute("member", mb);
 		
 		// 리스트 이동
-		response.sendRedirect("/Jboard1/list.jsp");
+		response.sendRedirect("/Farmstory1");
 		
 	}else{
 		// 회원이 아닐 경우
-		response.sendRedirect("/Jboard1/user/login.jsp?result=fail");
+		response.sendRedirect("/Farmstory1/user/login.jsp?result=fail");
 	}
 	
 	// 6단계
