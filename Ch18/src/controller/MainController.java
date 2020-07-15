@@ -82,11 +82,18 @@ public class MainController extends HttpServlet {
 		String action = uri.substring(path.length());	// /hello.do, /welcome.do, /greeting.do, /hey.do
 		
 		CommonService instance = (CommonService)instances.get(action);
-		String view = instance.requestProc(req, resp);
+		String result = instance.requestProc(req, resp);
 		
-		// view 포워드
-		RequestDispatcher dispatcher = req.getRequestDispatcher(view);
-		dispatcher.forward(req, resp);
+		if(result.startsWith("redirect:")) {
+			// 리다이렉트
+			String redirectURL = result.substring(9);
+			resp.sendRedirect(redirectURL);
+		} else {
+			// view 포워드
+			RequestDispatcher dispatcher = req.getRequestDispatcher(result);
+			dispatcher.forward(req, resp);
+		}
+		
 		
 	}
 }
